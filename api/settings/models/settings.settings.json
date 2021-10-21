@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "settings",
+  "info": {
+    "name": "Settings"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "comments_moderated": {
+      "type": "boolean"
+    },
+    "verification_required": {
+      "type": "boolean"
+    },
+    "read_only": {
+      "type": "boolean"
+    }
+  }
+}
