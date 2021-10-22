@@ -1,3 +1,5 @@
-# Strapi application
+# Social Networking Backend
 
-A quick description of your strapi application
+A REST API for social networking backend.
+
+Uses strapi
