@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "forums",
+  "info": {
+    "name": "Forums",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text"
+    },
+    "in_response_to": {
+      "model": "forums"
+    }
+  }
+}

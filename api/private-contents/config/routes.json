@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/private-contents",
+      "handler": "private-contents.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/private-contents/count",
+      "handler": "private-contents.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/private-contents/:id",
+      "handler": "private-contents.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/private-contents",
+      "handler": "private-contents.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/private-contents/:id",
+      "handler": "private-contents.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/private-contents/:id",
+      "handler": "private-contents.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

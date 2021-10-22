@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "private_contents",
+  "info": {
+    "name": "Private Contents"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "data": {
+      "type": "text"
+    }
+  }
+}

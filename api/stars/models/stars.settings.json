@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "stars",
+  "info": {
+    "name": "Stars"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    }
+  }
+}
