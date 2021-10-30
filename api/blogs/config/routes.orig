@@ -10,14 +10,6 @@
     },
     {
       "method": "GET",
-      "path": "/getBlogPosts",
-      "handler": "blogs.find",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
       "path": "/blogs/count",
       "handler": "blogs.count",
       "config": {
@@ -37,7 +29,7 @@
       "path": "/blogs",
       "handler": "blogs.create",
       "config": {
-        "policies": ["global::is-authenticated"]
+        "policies": []
       }
     },
     {
@@ -45,7 +37,7 @@
       "path": "/blogs/:id",
       "handler": "blogs.update",
       "config": {
-        "policies": ["global::is-authenticated"]
+        "policies": []
       }
     },
     {
@@ -53,7 +45,7 @@
       "path": "/blogs/:id",
       "handler": "blogs.delete",
       "config": {
-        "policies": ["global::is-authenticated"]
+        "policies": []
       }
     }
   ]
