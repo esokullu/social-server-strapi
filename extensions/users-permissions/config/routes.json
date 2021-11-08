@@ -1,0 +1,49 @@
+{
+  "routes": [
+    {
+      "method": "post",
+      "path": "/login",
+      "handler": "Auth.callback",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Login with cookies",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "Auth",
+          "actionType": "Post"
+        }
+      }
+    },
+    {
+      "method": "post",
+      "path": "/logout",
+      "handler": "User.logout",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Logout and destroy cookies",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "Post"
+        }
+      }
+    },
+    {
+      "method": "get",
+      "path": "/whoami",
+      "handler": "User.me",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Fetch identity",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "Get"
+        }
+      }
+    }
+  ]
+}
