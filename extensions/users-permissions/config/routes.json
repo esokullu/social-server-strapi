@@ -1,8 +1,8 @@
 {
   "routes": [
     {
-      "method": "post",
-      "path": "/login",
+      "method": "get",
+      "path": "/v1/login",
       "handler": "Auth.callback",
       "config": {
         "policies": [],
@@ -11,13 +11,13 @@
         "tag": {
           "plugin": "users-permissions",
           "name": "Auth",
-          "actionType": "Post"
+          "actionType": "Get"
         }
       }
     },
     {
-      "method": "post",
-      "path": "/logout",
+      "method": "get",
+      "path": "/v1/logout",
       "handler": "User.logout",
       "config": {
         "policies": [],
@@ -26,13 +26,13 @@
         "tag": {
           "plugin": "users-permissions",
           "name": "User",
-          "actionType": "Post"
+          "actionType": "Get"
         }
       }
     },
     {
       "method": "get",
-      "path": "/whoami",
+      "path": "/v1/whoami",
       "handler": "User.me",
       "config": {
         "policies": [],
