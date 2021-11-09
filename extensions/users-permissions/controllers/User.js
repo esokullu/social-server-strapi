@@ -24,10 +24,13 @@ module.exports = {
     const user = ctx.state.user;
 
     if (!user) {
-      return ctx.badRequest(null, [{ messages: [{ id: 'No authorization header was found' }] }]);
+      ctx.body = {
+        authorized: false,
+        message: "No active session",
+      };
+    } else {
+      ctx.body = sanitizeUser(user);
     }
-
-    ctx.body = sanitizeUser(user);
   },
 
   /**
