@@ -21,7 +21,10 @@ module.exports = {
   async callback(ctx) {
     const provider = ctx.params.provider || 'local';
     const params = ctx.request.body;
-
+    const requestQuery = ctx.request.query;
+    params['identifier'] = requestQuery.username;
+    params['password'] = requestQuery.password;
+    
     const store = await strapi.store({
       environment: '',
       type: 'plugin',
