@@ -25,7 +25,7 @@ module.exports = {
 
     if (!user) {
       ctx.body = {
-        authorized: false,
+        success: false,
         message: "No active session",
       };
     } else {
@@ -40,8 +40,7 @@ module.exports = {
   async logout(ctx) {
     ctx.cookies.set("token", null);
     ctx.send({
-      authorized: true,
-      message: "Successfully destroyed session",
+      success: true
     });
   },
 };
