@@ -18,8 +18,8 @@
     },
     {
       "method": "GET",
-      "path": "/blogs/:id",
-      "handler": "blogs.findOne",
+      "path": "/v1/getBlogPost",
+      "handler": "blogs.getBlogPost",
       "config": {
         "policies": []
       }

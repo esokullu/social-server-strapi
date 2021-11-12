@@ -58,6 +58,10 @@
       "via": "users",
       "plugin": "users-permissions",
       "configurable": false
+    },
+    "blogs": {
+      "via": "author",
+      "collection": "blogs"
     }
   }
 }

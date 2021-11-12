@@ -15,7 +15,8 @@ module.exports = {
       if(validator.isLength(query.title, {min:1, max: 255}) && validator.isLength(query.content, {min:1})) {
         const blog = await strapi.services.blogs.create({
           title: query.title,
-          content: query.content
+          content: query.content,
+          author: ctx.req.user.id
         })
         const sanitizedBlog = sanitizeEntity(blog, {
           model: strapi.models["blogs"],
@@ -23,6 +24,46 @@ module.exports = {
         ctx.send({
           success: true,
           id: sanitizedBlog.id
+        });
+      } else {
+        ctx.send({
+          success: false,
+          reason: "Title (up to 255 chars) and Content are required."
+        });
+      }
+    } catch (error) {
+      ctx.send({
+        success: false,
+        reason: "Internal Error."
+      });
+    }
+  },
+
+  async getBlogPost(ctx) {
+    try {
+      const query = ctx.query;
+      if(validator.isLength(query.id, {min:1})) {
+        const blog = await strapi.services.blogs.findOne({
+          id: query.id,
+        })
+        const sanitizedBlog = sanitizeEntity(blog, {
+          model: strapi.models["blogs"],
+        });
+        ctx.send({
+          success: false,
+          blog: {
+            id: sanitizedBlog.id,
+            title: sanitizedBlog.title,
+            summary: sanitizedBlog.content,
+            author: {
+              id: sanitizedBlog.author.id,
+              username: sanitizedBlog.author.username,
+            },
+            start_time: sanitizedBlog.created_at,
+            is_draft: sanitizedBlog.is_draft,
+            last_edit: sanitizedBlog.updated_at,
+            publish_time: sanitizedBlog.published_at
+          }
         });
       } else {
         ctx.send({
