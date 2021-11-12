@@ -77,5 +77,52 @@ module.exports = {
         reason: "Internal Error."
       });
     }
-  }
+  },
+
+  async getBlogPosts(ctx) {
+    try {
+      const query = ctx.query;
+      const order = !query.order ? "DESC" : query.order;
+      const count = !query.count ? 10 : query.count;
+      const offset = !query.offset ? 1 : query.offset;
+
+      const posts = await strapi.services.blogs.find({
+        _limit: count, 
+        _sort: `created_at:${order}`,
+        _start: offset - 1
+      });
+
+      const sanitizedPosts = posts.map(blog => {
+        const sanitizedBlog = sanitizeEntity(blog, {
+          model: strapi.models["blogs"],
+        });
+        return {
+          id: sanitizedBlog.id,
+          title: sanitizedBlog.title,
+          summary: sanitizedBlog.content,
+          author: {
+            id: sanitizedBlog.author.id,
+            username: sanitizedBlog.author.username,
+          },
+          start_time: sanitizedBlog.created_at,
+          is_draft: sanitizedBlog.is_draft,
+          last_edit: sanitizedBlog.updated_at,
+          publish_time: sanitizedBlog.published_at,
+          comment_count: sanitizedBlog.comments.length
+        }
+      })
+
+      ctx.send({
+        success: true,
+        blogs: sanitizedPosts,
+        total: sanitizedPosts.length
+      });
+
+    } catch (error) {
+      ctx.send({
+        success: false,
+        reason: "Internal Error."
+      });
+    }
+  },
 };

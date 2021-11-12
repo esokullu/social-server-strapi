@@ -25,6 +25,10 @@
       "plugin": "users-permissions",
       "model": "user",
       "via": "blogs"
+    },
+    "comments": {
+      "collection": "comments",
+      "via": "blog"
     }
   }
 }

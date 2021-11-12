@@ -2,16 +2,8 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/blogs",
-      "handler": "blogs.find",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/blogs/count",
-      "handler": "blogs.count",
+      "path": "/v1/getBlogPosts",
+      "handler": "blogs.getBlogPosts",
       "config": {
         "policies": []
       }
@@ -28,22 +20,6 @@
       "method": "GET",
       "path": "/v1/startBlogPost",
       "handler": "blogs.startBlogPost",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "PUT",
-      "path": "/blogs/:id",
-      "handler": "blogs.update",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "DELETE",
-      "path": "/blogs/:id",
-      "handler": "blogs.delete",
       "config": {
         "policies": []
       }
