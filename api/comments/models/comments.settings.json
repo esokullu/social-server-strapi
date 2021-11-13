@@ -16,6 +16,10 @@
     },
     "content": {
       "type": "text"
+    },
+    "blog": {
+      "via": "comments",
+      "model": "blogs"
     }
   }
 }

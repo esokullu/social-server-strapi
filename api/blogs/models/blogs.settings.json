@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "blogs",
   "info": {
-    "name": "Blogs"
+    "name": "Blogs",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -19,6 +20,15 @@
     },
     "is_draft": {
       "type": "boolean"
+    },
+    "author": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "blogs"
+    },
+    "comments": {
+      "collection": "comments",
+      "via": "blog"
     }
   }
 }
