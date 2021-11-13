@@ -118,11 +118,18 @@ module.exports = {
           maxAge: 1000 * 60 * 60 * 24 * 14, // 14 Day Age
           domain: process.env.NODE_ENV === "development" ? "localhost" : process.env.PRODUCTION_URL,
         });
+        let _user = sanitizeEntity(user.toJSON ? user.toJSON() : user, {
+          model: strapi.query('user', 'users-permissions').model,
+        });
         ctx.send({
-          status: 'Authenticated',
-          user: sanitizeEntity(user.toJSON ? user.toJSON() : user, {
-            model: strapi.query('user', 'users-permissions').model,
-          }),
+          success: true,
+          id: _user.id,
+          username: _user.username,
+          pending: false,
+          strapi: {
+            status: 'Authenticated',
+            user: _user
+          },
         });
       }
     } else {
