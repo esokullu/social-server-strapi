@@ -70,7 +70,7 @@ module.exports = {
       if (!user) {
         return ctx.send({
           success: false,
-          message: 'Identifier or password invalid.',
+          message: 'Information don\'t match records',
         });
       }
 
@@ -106,7 +106,7 @@ module.exports = {
       if (!validPassword) {
         return ctx.send({
           success: false,
-          message: 'Identifier or password invalid.',
+          message: 'Information don\'t match records',
         });
       } else {
         const token = strapi.plugins["users-permissions"].services.jwt.issue({
@@ -126,7 +126,7 @@ module.exports = {
           id: _user.id,
           username: _user.username,
           pending: false,
-          strapi: {
+          _strapi: {
             status: 'Authenticated',
             user: _user
           },

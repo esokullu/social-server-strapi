@@ -34,7 +34,7 @@ module.exports = {
     } catch (error) {
       ctx.send({
         success: false,
-        reason: "Internal Error."
+        reason: "Title (up to 255 chars) and Content are required."
       });
     }
   },
