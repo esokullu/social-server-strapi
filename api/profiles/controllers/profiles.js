@@ -47,44 +47,52 @@ module.exports = {
   },
 
   async getProfile(ctx) {
-    const query = ctx.request.query
-    if(!query.id) {
-      return ctx.send({
-        success: false,
-        reason: "Invalid user ID"
-      })
-    }
-    const profile = await strapi.services.profiles.findOne({
-      user: query.id
-    })
-    if(!profile) {
-      return ctx.send({
-        success: false,
-        reason: "Invalid user ID"
-      })
-    }
-    const sanitizedProfile = sanitizeEntity(profile, {
-      model: strapi.models["profiles"],
-    })
-    ctx.send({
-      success: true,
-      profile: {
-        username: sanitizedProfile.user.username,
-        email: sanitizedProfile.user.email,
-        jointime: sanitizedProfile.user.createdAt,
-        avatar: sanitizedProfile.avatar,
-        birthday: sanitizedProfile.birthday,
-        about: sanitizedProfile.about,
-        iseditor: false,
-        customfield1: sanitizedProfile.customfield1,
-        customfield2: sanitizedProfile.customfield2,
-        customfield3: sanitizedProfile.customfield3,
-        pending: false,
-        pendingverification: 0,
-        follower_count: sanitizedProfile.user.user_follower ? sanitizedProfile.user.user_follower.length : 0,
-        following_count: sanitizedProfile.user.user_following ? sanitizedProfile.user.user_following.length : 0,
-        membership_count: 0
+    try {
+      const query = ctx.request.query
+      if(!query.id) {
+        return ctx.send({
+          success: false,
+          reason: "Invalid user ID"
+        })
       }
-    })
+      const profile = await strapi.services.profiles.findOne({
+        user: query.id
+      })
+      if(!profile) {
+        return ctx.send({
+          success: false,
+          reason: "Invalid user ID"
+        })
+      }
+      const sanitizedProfile = sanitizeEntity(profile, {
+        model: strapi.models["profiles"],
+      })
+      ctx.send({
+        success: true,
+        profile: {
+          username: sanitizedProfile.user.username,
+          email: sanitizedProfile.user.email,
+          jointime: sanitizedProfile.user.createdAt,
+          avatar: sanitizedProfile.avatar,
+          birthday: sanitizedProfile.birthday,
+          about: sanitizedProfile.about,
+          iseditor: false,
+          customfield1: sanitizedProfile.customfield1,
+          customfield2: sanitizedProfile.customfield2,
+          customfield3: sanitizedProfile.customfield3,
+          pending: false,
+          pendingverification: 0,
+          follower_count: sanitizedProfile.user.user_follower ? sanitizedProfile.user.user_follower.length : 0,
+          following_count: sanitizedProfile.user.user_following ? sanitizedProfile.user.user_following.length : 0,
+          membership_count: 0
+        }
+      })
+    } catch (error) {
+      ctx.send({
+        success: false,
+        reason: "Internal Error."
+      });
+    }
+    
   }
 };
