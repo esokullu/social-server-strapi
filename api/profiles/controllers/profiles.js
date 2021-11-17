@@ -2,6 +2,7 @@
 
 const { default: createStrapi } = require('strapi');
 const { sanitizeEntity } = require('strapi-utils');
+const { profileHelper } = require('../../../helpers/user');
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -69,23 +70,7 @@ module.exports = {
       })
       ctx.send({
         success: true,
-        profile: {
-          username: sanitizedProfile.user.username,
-          email: sanitizedProfile.user.email,
-          jointime: sanitizedProfile.user.createdAt,
-          avatar: sanitizedProfile.avatar,
-          birthday: sanitizedProfile.birthday,
-          about: sanitizedProfile.about,
-          iseditor: false,
-          customfield1: sanitizedProfile.customfield1,
-          customfield2: sanitizedProfile.customfield2,
-          customfield3: sanitizedProfile.customfield3,
-          pending: false,
-          pendingverification: 0,
-          follower_count: sanitizedProfile.user.user_follower ? sanitizedProfile.user.user_follower.length : 0,
-          following_count: sanitizedProfile.user.user_following ? sanitizedProfile.user.user_following.length : 0,
-          membership_count: 0
-        }
+        profile: profileHelper(sanitizedProfile)
       })
     } catch (error) {
       ctx.send({

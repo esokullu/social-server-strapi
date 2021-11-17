@@ -1,6 +1,7 @@
 'use strict';
 
 const { sanitizeEntity } = require('strapi-utils');
+const { profileHelper } = require('../../../helpers/user');
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -101,5 +102,115 @@ module.exports = {
         reason: "Internal Error."
       });
     }
-  } 
+  },
+
+  async getFollowing(ctx) {
+    const query = ctx.request.query
+    if(Object.keys(query).length === 0) {
+      ctx.send({
+        success: false,
+        reason: "No field to set"
+      })
+    }
+
+    const user = await strapi.query('user', 'users-permissions').findOne({
+      id: query.id
+    })
+    if(!user) {
+      return ctx.send({
+        success: false,
+        reason: "Invalid user ID"
+      })
+    }      
+
+    const following = await Promise.all(Object.entries(user.user_followings).map(async ([key, item]) => {
+      let profile = await strapi.services.profiles.findOne({
+        user: item.following
+      })
+      if(!profile) {
+        profile = await strapi.services.profiles.create({
+          user: item.following
+        })
+      }
+      let sanitizedProfile = sanitizeEntity(profile, {
+        model: strapi.models["profiles"],
+      })
+      sanitizedProfile = await profileHelper(sanitizedProfile)
+      return {
+        [`${item.following}`]: sanitizedProfile
+      }
+    }))
+
+    return ctx.send({
+      success: true,
+      following
+    })
+  },
+
+  async getFollower(ctx) {
+    const query = ctx.request.query
+    if(Object.keys(query).length === 0) {
+      ctx.send({
+        success: false,
+        reason: "No field to set"
+      })
+    }
+
+    const user = await strapi.query('user', 'users-permissions').findOne({
+      id: query.id
+    })
+    if(!user) {
+      return ctx.send({
+        success: false,
+        reason: "Invalid user ID"
+      })
+    }    
+
+    const followers = await Promise.all(Object.entries(user.user_followers).map(async ([key, item]) => {
+      let profile = await strapi.services.profiles.findOne({
+        user: item.follower
+      })
+      if(!profile) {
+        profile = await strapi.services.profiles.create({
+          user: item.follower
+        })
+      }
+      let sanitizedProfile = sanitizeEntity(profile, {
+        model: strapi.models["profiles"],
+      })
+      sanitizedProfile = await profileHelper(sanitizedProfile)
+      return {
+        [`${item.follower}`]: sanitizedProfile
+      }
+    }))
+
+    return ctx.send({
+      success: true,
+      followers
+    })
+  },
+
+  async getMembers(ctx) {
+    const users = await strapi.query('user', 'users-permissions').find({
+      _limit: -1
+    })
+    const sanitizedUsers = users.map(item=>{
+      const sanitizedUser = sanitizeEntity(item, {
+        model: strapi.query('user', 'users-permissions').model,
+      });
+      return {
+        [`${sanitizedUser.id}`]: {
+          "id": sanitizedUser.id,
+          "username": sanitizedUser.username,
+          "email": sanitizedUser.email,
+          "avatar": sanitizedUser.profile.avatar,
+          "is_editor": sanitizedUser.role.name == "editor" ? 1 : 0
+      },
+      }
+    })
+    ctx.send({
+      success: true,
+      members: sanitizedUsers
+    })
+  }
 };

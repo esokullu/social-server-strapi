@@ -67,12 +67,12 @@
       "via": "user",
       "model": "profiles"
     },
-    "user_follower": {
-      "model": "follows",
+    "user_followings": {
+      "collection": "follows",
       "via": "follower"
     },
-    "user_following": {
-      "model": "follows",
+    "user_followers": {
+      "collection": "follows",
       "via": "following"
     }
   }

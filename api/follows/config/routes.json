@@ -55,6 +55,38 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/unfollow",
+      "handler": "follows.unfollow",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getFollowing",
+      "handler": "follows.getFollowing",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getFollower",
+      "handler": "follows.getFollower",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getMembers",
+      "handler": "follows.getMembers",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

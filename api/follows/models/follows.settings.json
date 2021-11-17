@@ -13,12 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "follower": {
-      "via": "user_follower",
+      "via": "user_followings",
       "plugin": "users-permissions",
       "model": "user"
     },
     "following": {
-      "via": "user_following",
+      "via": "user_followers",
       "plugin": "users-permissions",
       "model": "user"
     }
