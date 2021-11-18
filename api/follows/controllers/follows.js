@@ -147,7 +147,7 @@ module.exports = {
     })
   },
 
-  async getFollower(ctx) {
+  async getFollowers(ctx) {
     const query = ctx.request.query
     if(Object.keys(query).length === 0) {
       ctx.send({

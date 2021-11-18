@@ -74,8 +74,8 @@
     },
     {
       "method": "GET",
-      "path": "/v1/getFollower",
-      "handler": "follows.getFollower",
+      "path": "/v1/getFollowers",
+      "handler": "follows.getFollowers",
       "config": {
         "policies": []
       }
