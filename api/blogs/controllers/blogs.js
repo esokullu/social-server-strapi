@@ -50,7 +50,7 @@ module.exports = {
           model: strapi.models["blogs"],
         });
         ctx.send({
-          success: false,
+          success: true,
           blog: {
             id: sanitizedBlog.id,
             title: sanitizedBlog.title,

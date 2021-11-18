@@ -47,6 +47,22 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/setProfile",
+      "handler": "profiles.setProfile",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getProfile",
+      "handler": "profiles.getProfile",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

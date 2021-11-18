@@ -22,9 +22,9 @@
       "type": "boolean"
     },
     "author": {
+      "via": "blogs",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "blogs"
+      "model": "user"
     },
     "comments": {
       "collection": "comments",
