@@ -1,15 +1,26 @@
 module.exports = ({ env }) => ({
-  defaultConnection: 'default',
+  defaultConnection: "default",
   connections: {
     default: {
-      connector: 'bookshelf',
+      connector: "bookshelf",
       settings: {
-        client: 'sqlite',
-        filename: env('DATABASE_FILENAME', '.tmp/data.db'),
+        client: "mysql",
+        database: "social-server",
+        host: "127.0.0.1",
+        port: 3306,
+        username: "root",
+        password: ""
       },
       options: {
-        useNullAsDefault: true,
-      },
-    },
-  },
+        pool: { 
+          min: 0,
+          max: 10,
+          idleTimeoutMillis: 30000,
+          createTimeoutMillis: 30000,
+          acquireTimeoutMillis: 30000
+        },
+        asyncStackTraces: true
+      }
+    }
+  }
 });

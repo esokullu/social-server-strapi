@@ -13,14 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "user": {
+      "via": "profile",
       "plugin": "users-permissions",
       "model": "user"
     },
     "birthday": {
       "type": "date"
-    },
-    "username": {
-      "type": "string"
     },
     "about": {
       "type": "text"
@@ -37,8 +35,14 @@
       "required": false,
       "pluginOptions": {}
     },
-    "email": {
-      "type": "email"
+    "customfield1": {
+      "type": "text"
+    },
+    "customfield2": {
+      "type": "text"
+    },
+    "customfield3": {
+      "type": "text"
     }
   }
 }
