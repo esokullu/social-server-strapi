@@ -169,4 +169,157 @@ module.exports = {
       });
     }
   },
+
+  async register(ctx) {
+    const pluginStore = await strapi.store({
+      environment: '',
+      type: 'plugin',
+      name: 'users-permissions',
+    });
+
+
+    const settings = await pluginStore.get({
+      key: 'advanced',
+    });
+
+    if (!settings.allow_register) {
+      return ctx.badRequest(
+        null,
+        formatError({
+          id: 'Auth.advanced.allow_register',
+          message: 'Register action is currently disabled.',
+        })
+      );
+    }
+
+    const params = {
+      ..._.omit(ctx.request.body, ['confirmed', 'confirmationToken', 'resetPasswordToken']),
+      provider: 'local',
+    };
+
+    const requestQuery = ctx.request.query;
+    params['username'] = requestQuery.username;
+    params['email'] = requestQuery.email;
+    params['password'] = requestQuery.password;
+
+    // Password, email, username is required.
+    if (!params.password || !params.email || !params.username) {
+      return ctx.send({
+        success: false,
+        reason: "Valid username, email and password required."
+      })
+    }
+    // Throw an error if the password selected by the user
+    // contains more than three times the symbol '$'.
+    if (strapi.plugins['users-permissions'].services.user.isHashed(params.password)) {
+      return ctx.badRequest(
+        null,
+        formatError({
+          id: 'Auth.form.error.password.format',
+          message: 'Your password cannot contain more than three times the symbol `$`.',
+        })
+      );
+    }
+
+    const role = await strapi
+      .query('role', 'users-permissions')
+      .findOne({ type: settings.default_role }, []);
+
+    if (!role) {
+      return ctx.badRequest(
+        null,
+        formatError({
+          id: 'Auth.form.error.role.notFound',
+          message: 'Impossible to find the default role.',
+        })
+      );
+    }
+
+    // Check if the provided email is valid or not.
+    const isEmail = emailRegExp.test(params.email);
+
+    if (isEmail) {
+      params.email = params.email.toLowerCase();
+    } else {
+      return ctx.badRequest(
+        null,
+        formatError({
+          id: 'Auth.form.error.email.format',
+          message: 'Please provide valid email address.',
+        })
+      );
+    }
+
+    params.role = role.id;
+    params.password = await strapi.plugins['users-permissions'].services.user.hashPassword(params);
+
+    const user = await strapi.query('user', 'users-permissions').findOne({
+      email: params.email,
+    });
+
+    if (user && user.provider === params.provider) {
+      return ctx.send({
+        success: false,
+        reason: "Duplicate user"
+      })
+    }
+
+    if (user && user.provider !== params.provider && settings.unique_email) {
+      return ctx.send({
+        success: false,
+        reason: "Duplicate user"
+      })
+    }
+
+    if (params.username) {
+      const user = await strapi.query('user', 'users-permissions').findOne({ username: params.username });
+
+      if (user) {
+        return ctx.send({
+          success: false,
+          reason: "Duplicate user"
+        })
+      }
+    }
+
+    try {
+      if (!settings.email_confirmation) {
+        params.confirmed = true;
+      }
+
+      const user = await strapi.query('user', 'users-permissions').create(params);
+      const profile = await strapi.services.profiles.create({
+        user: user.id
+      })
+
+      const sanitizedUser = sanitizeEntity(user, {
+        model: strapi.query('user', 'users-permissions').model,
+      });
+
+      if (settings.email_confirmation) {
+        try {
+          await strapi.plugins['users-permissions'].services.user.sendConfirmationEmail(user);
+        } catch (err) {
+          return ctx.badRequest(null, err);
+        }
+
+        return ctx.send({ user: sanitizedUser });
+      }
+
+      const jwt = strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user, ['id']));
+
+      return ctx.send({
+        success: true,
+        id: sanitizedUser.id,
+        username: sanitizedUser.username,
+        pending_moderation: false,
+        pending_verification: false
+      });
+    } catch (err) {
+      return ctx.send({
+        success: false,
+        reason: "Duplicate user"
+      })
+    }
+  },
 };
