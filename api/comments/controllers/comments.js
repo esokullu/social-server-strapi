@@ -5,4 +5,10 @@
  * to customize this controller
  */
 
-module.exports = {};
+module.exports = {
+    async addComment(ctx) {
+        // how to duplicate the functionality of 
+        // comments.create here, without rewriting the business
+        // logic
+      },
+};

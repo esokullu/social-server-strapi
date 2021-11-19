@@ -33,6 +33,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/addComment",
+      "handler": "addComment",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/comments/:id",
       "handler": "comments.update",
