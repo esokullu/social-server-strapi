@@ -29,7 +29,31 @@ module.exports = {
         message: "No active session",
       };
     } else {
-      ctx.body = sanitizeUser(user);
+      let me = sanitizeUser(user);
+      /*
+        id	1
+        username	"emre"
+        email	"emre@groups-inc.com"
+        provider	"local"
+        confirmed	false
+        blocked	false
+        role	
+        id	1
+        name	"Authenticated"
+        description	"Default role given to authenticated user."
+        type	"authenticated"
+        created_at	"2021-10-28T15:30:53.516Z"
+        updated_at	"2021-10-28T15:30:53.528Z"
+      */
+      ctx.body = {
+        success: true,
+        id: me.id,
+        admin: false,
+        username: me.username,
+        editor: true,
+        pending: false
+
+      };
     }
   },
 

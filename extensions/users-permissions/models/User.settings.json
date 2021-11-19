@@ -62,6 +62,18 @@
     "blogs": {
       "via": "author",
       "collection": "blogs"
+    },
+    "profile": {
+      "via": "user",
+      "model": "profiles"
+    },
+    "user_followings": {
+      "collection": "follows",
+      "via": "follower"
+    },
+    "user_followers": {
+      "collection": "follows",
+      "via": "following"
     }
   }
 }

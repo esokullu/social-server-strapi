@@ -1,5 +1,8 @@
 'use strict';
 
+const { sanitizeEntity } = require('strapi-utils');
+const { profileHelper } = require('../../../helpers/user');
+
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
@@ -139,7 +142,7 @@ module.exports = {
     })
   },
 
-  async getFollower(ctx) {
+  async getFollowers(ctx) {
     const query = ctx.request.query
     if(Object.keys(query).length === 0) {
       ctx.send({
