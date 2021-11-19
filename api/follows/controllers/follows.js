@@ -127,11 +127,6 @@ module.exports = {
       let profile = await strapi.services.profiles.findOne({
         user: item.following
       })
-      if(!profile) {
-        profile = await strapi.services.profiles.create({
-          user: item.following
-        })
-      }
       let sanitizedProfile = sanitizeEntity(profile, {
         model: strapi.models["profiles"],
       })
@@ -170,11 +165,6 @@ module.exports = {
       let profile = await strapi.services.profiles.findOne({
         user: item.follower
       })
-      if(!profile) {
-        profile = await strapi.services.profiles.create({
-          user: item.follower
-        })
-      }
       let sanitizedProfile = sanitizeEntity(profile, {
         model: strapi.models["profiles"],
       })

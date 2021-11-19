@@ -288,6 +288,9 @@ module.exports = {
       }
 
       const user = await strapi.query('user', 'users-permissions').create(params);
+      const profile = await strapi.services.profiles.create({
+        user: user.id
+      })
 
       const sanitizedUser = sanitizeEntity(user, {
         model: strapi.query('user', 'users-permissions').model,
