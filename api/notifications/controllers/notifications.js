@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-    async getNotificationCount(ctx) {
+    async getNotificationsCount(ctx) {
         ctx.send({
             success: true,
             count: 0
