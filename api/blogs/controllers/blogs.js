@@ -85,6 +85,7 @@ module.exports = {
       if(validator.isLength(query.id, {min:1})) {
         const blog = await strapi.services.blogs.delete({
           id: query.id,
+          _limit: 1 // do not delete more than one
         })
         ctx.send({
           success: true
@@ -108,12 +109,12 @@ module.exports = {
       const query = ctx.query;
       const order = !query.order ? "DESC" : query.order.toUpperCase();
       const count = !query.count ? 10 : query.count;
-      const offset = !query.offset ? 1 : (query.offset < 1 ? 1 : query.offset);
+      const offset = !query.offset ? 0 : query.offset;
 
       const posts = await strapi.services.blogs.find({
         _limit: count, 
         _sort: `created_at:${order}`,
-        _start: offset - 1
+        _start: offset 
       });
 
       const sanitizedPosts = posts.map(blog => {
