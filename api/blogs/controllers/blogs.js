@@ -79,6 +79,30 @@ module.exports = {
     }
   },
 
+  async removeBlogPost(ctx) {
+    try {
+      const query = ctx.query;
+      if(validator.isLength(query.id, {min:1})) {
+        const blog = await strapi.services.blogs.delete({
+          id: query.id,
+        })
+        ctx.send({
+          success: true
+        });
+      } else {
+        ctx.send({
+          success: false,
+          reason: "ID is required."
+        });
+      }
+    } catch (error) {
+      ctx.send({
+        success: false,
+        reason: "Internal Error."
+      });
+    }
+  },
+
   async getBlogPosts(ctx) {
     try {
       const query = ctx.query;

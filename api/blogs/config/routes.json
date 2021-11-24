@@ -31,6 +31,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/removeBlogPost",
+      "handler": "blogs.removeBlogPost",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
