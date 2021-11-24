@@ -47,6 +47,16 @@
       "config": {
         "policies": []
       }
+    },
+
+
+    {
+      "method": "GET",
+      "path": "/createGroup",
+      "handler": "groups.createGroup",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

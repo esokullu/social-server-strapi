@@ -82,9 +82,9 @@ module.exports = {
   async getBlogPosts(ctx) {
     try {
       const query = ctx.query;
-      const order = !query.order ? "DESC" : query.order;
+      const order = !query.order ? "DESC" : query.order.toUpperCase();
       const count = !query.count ? 10 : query.count;
-      const offset = !query.offset ? 1 : query.offset;
+      const offset = !query.offset ? 1 : (query.offset < 1 ? 1 : query.offset);
 
       const posts = await strapi.services.blogs.find({
         _limit: count, 
