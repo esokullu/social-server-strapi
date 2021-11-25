@@ -65,6 +65,7 @@ module.exports = {
       });
     }
   },
+
   async getComments(ctx) {
     const query = ctx.query;
     if(query.url && query.id) {
@@ -130,5 +131,37 @@ module.exports = {
         reason: "Url or ID is required."
       });
     }
+  },
+
+  async editComment(ctx) {
+    const query = ctx.query;
+    if(!query.content || !query.id) {
+      ctx.send({
+        success: false,
+        reason: "Comment ID and Content are required."
+      });
+    } else {
+      const comment = await strapi.services.comments.findOne({
+        id: query.id,
+        user: ctx.req.user.id,
+      })
+      if(!comment){
+        return ctx.send({
+          success: false,
+          reason: "Comment doesn't exist."
+        });
+      }
+      await strapi.services.comments.update({
+        id: query.id,
+        user: ctx.req.user.id
+      },
+      {
+        content: query.content
+      })
+      ctx.send({
+        success: true
+      });
+    }
+
   }
 };

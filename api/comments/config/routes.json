@@ -63,6 +63,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/editComment",
+      "handler": "comments.editComment",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
