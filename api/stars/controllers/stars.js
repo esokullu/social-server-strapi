@@ -87,6 +87,7 @@ module.exports = {
       });
     }
   },
+
   async unstar(ctx) {
     const query = ctx.query;
     if(query.url && query.id) {
@@ -149,6 +150,48 @@ module.exports = {
           reason: "This Blog not starred."
         });
       }
+    }
+    else {
+      ctx.send({
+        success: false,
+        reason: "Url or ID is required."
+      });
+    }
+  },
+
+  async isStarred(ctx) {
+    const query = ctx.query;
+    if(query.url && query.id) {
+      ctx.send({
+        success: false,
+        reason: "Can't use parameter Url and ID together."
+      });
+    }
+    else if(query.url) {
+      if(!validator.isURL(query.url)){
+        return ctx.send({
+          success: false,
+          reason: "Wrong Url format."
+        });
+      }
+      let stars = await strapi.services.stars.find({
+        url: query.url,
+      })
+      ctx.send({
+        success: true,
+        count: stars ? stars.length : 0,
+        starred: stars ? stars.some(item=>item.user.id === ctx.req.user.id) : false
+      });
+    }
+    else if(query.id) {
+      let stars = await strapi.services.stars.find({
+        blog: query.id,
+      })
+      ctx.send({
+        success: true,
+        count: stars ? stars.length : 0,
+        starred: stars ? stars.some(item=>item.user.id === ctx.req.user.id) : false
+      });
     }
     else {
       ctx.send({

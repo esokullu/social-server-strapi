@@ -63,6 +63,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/isStarred",
+      "handler": "stars.isStarred",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
