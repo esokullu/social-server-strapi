@@ -29,6 +29,10 @@
     "comments": {
       "collection": "comments",
       "via": "blog"
+    },
+    "stars": {
+      "via": "blog",
+      "collection": "stars"
     }
   }
 }

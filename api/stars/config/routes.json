@@ -55,6 +55,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/unstar",
+      "handler": "stars.unstar",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

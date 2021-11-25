@@ -19,6 +19,10 @@
       "plugin": "users-permissions",
       "model": "user",
       "via": "stars"
+    },
+    "blog": {
+      "model": "blogs",
+      "via": "stars"
     }
   }
 }
