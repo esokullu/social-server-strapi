@@ -7,6 +7,7 @@
 
 const validator = require('validator');
 const { fetch } = require('../../../helpers/api');
+const { groupBy } = require('lodash');
 
 module.exports = {
   async star(ctx) {
@@ -207,5 +208,24 @@ module.exports = {
         reason: "Url or ID is required."
       });
     }
+  },
+
+  async getStarredContent(ctx) {
+    const returnData = {}
+    const stars = await strapi.services.stars.find()
+    const groupedStars = groupBy(stars, (item)=>{
+      return item.url ? item.url : item.blog.id
+    })
+    Object.entries(groupedStars).forEach(([key, item])=>{
+      returnData[key] = {
+        title: item[0]['url'] ? item[0]['urlTitle'] : item[0]['blog']['title'],
+        star_count: item.length
+      }
+    })
+    ctx.send({
+      success: true,
+      pages: returnData
+    });
+
   }
 };
