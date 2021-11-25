@@ -79,6 +79,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getMyStarredContent",
+      "handler": "stars.getMyStarredContent",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

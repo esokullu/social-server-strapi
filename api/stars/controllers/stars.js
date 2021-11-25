@@ -7,7 +7,7 @@
 
 const validator = require('validator');
 const { fetch } = require('../../../helpers/api');
-const { groupBy } = require('lodash');
+const { groupStarred } = require('../../../helpers/content');
 
 module.exports = {
   async star(ctx) {
@@ -211,20 +211,21 @@ module.exports = {
   },
 
   async getStarredContent(ctx) {
-    const returnData = {}
     const stars = await strapi.services.stars.find()
-    const groupedStars = groupBy(stars, (item)=>{
-      return item.url ? item.url : item.blog.id
-    })
-    Object.entries(groupedStars).forEach(([key, item])=>{
-      returnData[key] = {
-        title: item[0]['url'] ? item[0]['urlTitle'] : item[0]['blog']['title'],
-        star_count: item.length
-      }
+    ctx.send({
+      success: true,
+      pages: groupStarred(stars)
+    });
+
+  },
+
+  async getMyStarredContent(ctx) {
+    const stars = await strapi.services.stars.find({
+      user: ctx.req.user.id,
     })
     ctx.send({
       success: true,
-      pages: returnData
+      pages: groupStarred(stars)
     });
 
   }
