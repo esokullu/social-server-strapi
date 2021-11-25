@@ -6,6 +6,7 @@
  */
 
 const validator = require('validator');
+const { fetch } = require('../../../helpers/api');
 
 module.exports = {
   async star(ctx) {
@@ -29,9 +30,16 @@ module.exports = {
         user: ctx.req.user.id,
       })
       if(!star) {
+        const urlResponse = await fetch(query.url);
+        const urlTitle = urlResponse.substring(
+          urlResponse.indexOf("<title>") + 7, 
+          urlResponse.lastIndexOf("</title>")
+        );
+      
         star = await strapi.services.stars.create({
           url: query.url,
           user: ctx.req.user.id,
+          urlTitle
         })
         const stars = await strapi.services.stars.find({
           url: query.url,

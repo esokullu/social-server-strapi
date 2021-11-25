@@ -23,6 +23,9 @@
     "blog": {
       "model": "blogs",
       "via": "stars"
+    },
+    "urlTitle": {
+      "type": "string"
     }
   }
 }
