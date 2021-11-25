@@ -162,6 +162,33 @@ module.exports = {
         success: true
       });
     }
+  },
 
+  async removeComment(ctx) {
+    const query = ctx.query;
+    if(!query.comment_id) {
+      ctx.send({
+        success: false,
+        reason: "Comment ID are required."
+      });
+    } else {
+      const comment = await strapi.services.comments.findOne({
+        id: query.comment_id,
+        user: ctx.req.user.id,
+      })
+      if(!comment){
+        return ctx.send({
+          success: false,
+          reason: "Comment doesn't exist."
+        });
+      }
+      await strapi.services.comments.delete({
+        id: query.id,
+        user: ctx.req.user.id
+      })
+      ctx.send({
+        success: true
+      });
+    }
   }
 };
