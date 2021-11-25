@@ -64,5 +64,71 @@ module.exports = {
         reason: "Url or ID is required."
       });
     }
+  },
+  async getComments(ctx) {
+    const query = ctx.query;
+    if(query.url && query.id) {
+      ctx.send({
+        success: false,
+        reason: "Can't use parameter Url and ID together."
+      });
+    }
+    else if(query.url) {
+      if(!validator.isURL(query.url)){
+        return ctx.send({
+          success: false,
+          reason: "Wrong Url format."
+        });
+      }
+      const comments = await strapi.services.comments.find({
+        url: query.url
+      })
+      ctx.send({
+        success: true,
+        comments: comments.map(item=>{
+          return {
+            [item.id]: {
+              content: item.content,
+              pending: false,
+              createTime: item.created_at,
+              author: item.user.id
+            }
+          }
+        })
+      });
+    }
+    else if(query.id) {
+      const blog = await strapi.services.blogs.findOne({
+        id: query.id,
+      })
+      if(!blog) {
+        return ctx.send({
+          success: false,
+          reason: "Blog doesn't exist."
+        });
+      }
+      const comments = await strapi.services.comments.find({
+        blog: query.id
+      })
+      ctx.send({
+        success: true,
+        comments: comments.map(item=>{
+          return {
+            [item.id]: {
+              content: item.content,
+              pending: false,
+              createTime: item.created_at,
+              author: item.user.id
+            }
+          }
+        })
+      });
+    }
+    else {
+      ctx.send({
+        success: false,
+        reason: "Url or ID is required."
+      });
+    }
   }
 };

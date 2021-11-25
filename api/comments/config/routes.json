@@ -55,6 +55,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getComments",
+      "handler": "comments.getComments",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
