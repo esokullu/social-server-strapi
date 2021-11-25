@@ -78,6 +78,10 @@
     "stars": {
       "via": "user",
       "collection": "stars"
+    },
+    "comments": {
+      "via": "user",
+      "collection": "comments"
     }
   }
 }

@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "comments",
   "info": {
-    "name": "Comments"
+    "name": "Comments",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -20,6 +21,11 @@
     "blog": {
       "via": "comments",
       "model": "blogs"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "comments"
     }
   }
 }
