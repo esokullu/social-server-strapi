@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/star",
+      "handler": "stars.star",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

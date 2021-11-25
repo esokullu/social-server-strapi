@@ -74,6 +74,10 @@
     "user_followers": {
       "collection": "follows",
       "via": "following"
+    },
+    "stars": {
+      "via": "user",
+      "collection": "stars"
     }
   }
 }
