@@ -29,6 +29,10 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "uuid": {
+      "type": "uid",
+      "required": true
     }
   }
 }

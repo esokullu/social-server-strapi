@@ -16,16 +16,21 @@
       "type": "string"
     },
     "content": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "blog": {
       "via": "comments",
       "model": "blogs"
     },
     "user": {
+      "via": "comments",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "comments"
+      "model": "user"
+    },
+    "uuid": {
+      "type": "uid",
+      "required": true
     }
   }
 }

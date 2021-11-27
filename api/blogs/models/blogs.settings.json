@@ -13,10 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "content": {
-      "type": "richtext"
+      "type": "richtext",
+      "required": true
     },
     "is_draft": {
       "type": "boolean"
@@ -33,6 +35,10 @@
     "stars": {
       "via": "blog",
       "collection": "stars"
+    },
+    "uuid": {
+      "type": "uid",
+      "required": true
     }
   }
 }

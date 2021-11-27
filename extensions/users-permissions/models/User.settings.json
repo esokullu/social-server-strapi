@@ -82,6 +82,10 @@
     "comments": {
       "via": "user",
       "collection": "comments"
+    },
+    "uuid": {
+      "type": "uid",
+      "required": true
     }
   }
 }
