@@ -7,6 +7,7 @@
 
 const validator = require('validator');
 const { sanitizeEntity } = require("strapi-utils");
+const koaBody = require('koa-body');
 
 module.exports = {
   async startBlogPost(ctx) {
@@ -32,6 +33,7 @@ module.exports = {
         });
       }
     } catch (error) {
+      // try to fetch the POST query
       ctx.send({
         success: false,
         reason: "Title (up to 255 chars) and Content are required."

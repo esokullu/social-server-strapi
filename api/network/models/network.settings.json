@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "networks",
+  "info": {
+    "name": "Network"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "uuid": {
+      "type": "uid"
+    }
+  }
+}
