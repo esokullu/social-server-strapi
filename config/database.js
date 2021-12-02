@@ -1,26 +1,20 @@
 module.exports = ({ env }) => ({
-  defaultConnection: "default",
+  defaultConnection: 'default',
   connections: {
     default: {
-      connector: "bookshelf",
+      connector: 'mongoose',
       settings: {
-        client: "mysql",
-        database: "social-server",
-        host: "127.0.0.1",
-        port: 3306,
-        username: "root",
-        password: ""
+        host: env('DATABASE_HOST', '127.0.0.1'),
+        srv: env.bool('DATABASE_SRV', false),
+        port: env.int('DATABASE_PORT', 27017),
+        database: env('DATABASE_NAME', 'social_server'),
+        username: env('DATABASE_USERNAME', null),
+        password: env('DATABASE_PASSWORD', null),
       },
       options: {
-        pool: { 
-          min: 0,
-          max: 10,
-          idleTimeoutMillis: 30000,
-          createTimeoutMillis: 30000,
-          acquireTimeoutMillis: 30000
-        },
-        asyncStackTraces: true
-      }
-    }
-  }
+        authenticationDatabase: env('AUTHENTICATION_DATABASE', null),
+        ssl: env.bool('DATABASE_SSL', false),
+      },
+    },
+  },
 });

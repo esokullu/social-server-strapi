@@ -40,7 +40,7 @@ module.exports = {
     }
     else if(query.id) {
       const blog = await strapi.services.blogs.findOne({
-        id: query.id,
+        id: query.id.toString(),
       })
       if(!blog) {
         return ctx.send({
@@ -100,7 +100,7 @@ module.exports = {
     }
     else if(query.id) {
       const blog = await strapi.services.blogs.findOne({
-        id: query.id,
+        id: query.id.toString(),
       })
       if(!blog) {
         return ctx.send({
@@ -142,7 +142,7 @@ module.exports = {
       });
     } else {
       const comment = await strapi.services.comments.findOne({
-        id: query.id,
+        id: query.id.toString(),
         user: ctx.req.user.id,
       })
       if(!comment){
@@ -152,7 +152,7 @@ module.exports = {
         });
       }
       await strapi.services.comments.update({
-        id: query.id,
+        id: query.id.toString(),
         user: ctx.req.user.id
       },
       {
@@ -173,7 +173,7 @@ module.exports = {
       });
     } else {
       const comment = await strapi.services.comments.findOne({
-        id: query.comment_id,
+        id: query.comment_id.toString(),
         user: ctx.req.user.id,
       })
       if(!comment){
@@ -183,7 +183,7 @@ module.exports = {
         });
       }
       await strapi.services.comments.delete({
-        id: query.id,
+        id: query.id.toString(),
         user: ctx.req.user.id
       })
       ctx.send({

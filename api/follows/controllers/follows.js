@@ -25,7 +25,7 @@ module.exports = {
         })
       }
       const user = await strapi.query('user', 'users-permissions').findOne({
-        id: query.id
+        id: query.id.toString()
       })
       if(!user) {
         return ctx.send({
@@ -69,7 +69,7 @@ module.exports = {
       }
       
       const user = await strapi.query('user', 'users-permissions').findOne({
-        id: query.id
+        id: query.id.toString()
       })
       if(!user) {
         return ctx.send({
@@ -114,7 +114,7 @@ module.exports = {
     }
 
     const user = await strapi.query('user', 'users-permissions').findOne({
-      id: query.id
+      id: query.id.toString()
     })
     if(!user) {
       return ctx.send({
@@ -152,7 +152,7 @@ module.exports = {
     }
 
     const user = await strapi.query('user', 'users-permissions').findOne({
-      id: query.id
+      id: query.id.toString()
     })
     if(!user) {
       return ctx.send({
