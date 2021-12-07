@@ -18,7 +18,7 @@ const formatError = error => [
 ];
 
 module.exports = {
-  async callback(ctx) {
+  async login(ctx) {
     const provider = ctx.params.provider || 'local';
     const params = ctx.request.body;
     const requestQuery = ctx.request.query;

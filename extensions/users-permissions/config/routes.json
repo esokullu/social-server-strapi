@@ -3,7 +3,7 @@
     {
       "method": "get",
       "path": "/v1/login",
-      "handler": "Auth.callback",
+      "handler": "Auth.login",
       "config": {
         "policies": [],
         "prefix": "",
