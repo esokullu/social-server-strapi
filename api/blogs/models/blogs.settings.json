@@ -27,8 +27,12 @@
       "model": "user"
     },
     "comments": {
-      "collection": "comments",
-      "via": "blog"
+      "via": "blog",
+      "collection": "comments"
+    },
+    "stars": {
+      "via": "blog",
+      "collection": "stars"
     }
   }
 }

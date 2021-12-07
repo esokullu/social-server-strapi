@@ -26,8 +26,6 @@ const profileHelper = (sanitizedProfile) => {
   }
 }
 
-
-
 module.exports = {
   profileHelper
 }

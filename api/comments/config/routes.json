@@ -47,6 +47,38 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/addComment",
+      "handler": "comments.addComment",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getComments",
+      "handler": "comments.getComments",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/editComment",
+      "handler": "comments.editComment",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/removeComment",
+      "handler": "comments.removeComment",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
