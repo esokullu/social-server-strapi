@@ -46,7 +46,7 @@ module.exports = {
       const query = ctx.query;
       if(validator.isLength(query.id, {min:1})) {
         const blog = await strapi.services.blogs.findOne({
-          id: query.id,
+          id: query.id.toString(),
         })
         const sanitizedBlog = sanitizeEntity(blog, {
           model: strapi.models["blogs"],
@@ -86,7 +86,7 @@ module.exports = {
       const query = ctx.query;
       if(validator.isLength(query.id, {min:1})) {
         const blog = await strapi.services.blogs.delete({
-          id: query.id,
+          id: query.id.toString(),
           _limit: 1 // do not delete more than one
         })
         ctx.send({

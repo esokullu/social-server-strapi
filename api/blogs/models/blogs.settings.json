@@ -35,10 +35,6 @@
     "stars": {
       "via": "blog",
       "collection": "stars"
-    },
-    "uuid": {
-      "type": "uid",
-      "required": true
     }
   }
 }

@@ -16,13 +16,17 @@
       "type": "string",
       "required": true
     },
+    "from": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false
+    },
     "to": {
       "plugin": "users-permissions",
-      "collection": "user"
-    },
-    "uuid": {
-      "type": "uid",
-      "required": true
+      "model": "user"
     }
   }
 }

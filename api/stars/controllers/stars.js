@@ -58,7 +58,7 @@ module.exports = {
     }
     else if(query.id) {
       const blog = await strapi.services.blogs.findOne({
-        id: query.id,
+        id: query.id.toString(),
       })
       if(!blog) {
         return ctx.send({
@@ -133,7 +133,7 @@ module.exports = {
     }
     else if(query.id) {
       const blog = await strapi.services.blogs.findOne({
-        id: query.id,
+        id: query.id.toString(),
       })
       if(!blog) {
         return ctx.send({

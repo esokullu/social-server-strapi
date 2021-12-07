@@ -17,7 +17,7 @@
     },
     {
       "method": "get",
-      "path": "/v1/register",
+      "path": "/v1/signup",
       "handler": "Auth.register",
       "config": {
         "policies": [],

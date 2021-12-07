@@ -24,13 +24,9 @@
       "model": "blogs"
     },
     "user": {
-      "via": "comments",
       "plugin": "users-permissions",
-      "model": "user"
-    },
-    "uuid": {
-      "type": "uid",
-      "required": true
+      "model": "user",
+      "via": "comments"
     }
   }
 }
