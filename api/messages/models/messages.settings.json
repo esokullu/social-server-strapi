@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "message": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "from": {
       "plugin": "users-permissions",

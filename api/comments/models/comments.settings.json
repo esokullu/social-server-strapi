@@ -16,7 +16,8 @@
       "type": "string"
     },
     "content": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "blog": {
       "via": "comments",

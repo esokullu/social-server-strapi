@@ -2,56 +2,56 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/notifications",
-      "handler": "notifications.find",
+      "path": "/networks",
+      "handler": "network.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/notifications/count",
-      "handler": "notifications.count",
+      "path": "/networks/count",
+      "handler": "network.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/notifications/:id",
-      "handler": "notifications.findOne",
+      "path": "/networks/:id",
+      "handler": "network.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/notifications",
-      "handler": "notifications.create",
+      "path": "/networks",
+      "handler": "network.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/notifications/:id",
-      "handler": "notifications.update",
+      "path": "/networks/:id",
+      "handler": "network.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/notifications/:id",
-      "handler": "notifications.delete",
+      "path": "/networks/:id",
+      "handler": "network.delete",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/v1/getNotificationsCount",
-      "handler": "notifications.getNotificationsCount",
+      "path": "/v1/getCustomFields",
+      "handler": "network.getCustomFields",
       "config": {
         "policies": []
       }

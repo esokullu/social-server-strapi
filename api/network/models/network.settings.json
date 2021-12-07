@@ -1,9 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "forums",
+  "collectionName": "networks",
   "info": {
-    "name": "Forums",
-    "description": ""
+    "name": "Network"
   },
   "options": {
     "increments": true,
@@ -12,18 +11,14 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "slug": {
+      "type": "string"
+    },
     "title": {
       "type": "string"
     },
-    "message": {
-      "type": "text"
-    },
-    "in_response_to": {
-      "model": "forums"
-    },
     "uuid": {
-      "type": "uid",
-      "required": true
+      "type": "uid"
     }
   }
 }
