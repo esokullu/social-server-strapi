@@ -123,7 +123,7 @@ module.exports = {
         });
         ctx.send({
           success: true,
-          id: _user.id,
+          id: _user.id.toString(),
           username: _user.username,
           pending: false,
           _strapi: {
@@ -310,7 +310,7 @@ module.exports = {
 
       return ctx.send({
         success: true,
-        id: sanitizedUser.id,
+        id: sanitizedUser.id.toString(),
         username: sanitizedUser.username,
         pending_moderation: false,
         pending_verification: false
