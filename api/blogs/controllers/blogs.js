@@ -12,7 +12,8 @@ const koaBody = require('koa-body');
 module.exports = {
   async startBlogPost(ctx) {
     try {
-      const query = ctx.query;
+      // knowing it's GET or POST method
+      const query = ctx.query.title ? ctx.query : ctx.request.body;
       if(validator.isLength(query.title, {min:1, max: 255}) && validator.isLength(query.content, {min:1})) {
         const blog = await strapi.services.blogs.create({
           title: query.title,
