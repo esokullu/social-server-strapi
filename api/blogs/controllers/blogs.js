@@ -8,6 +8,7 @@
 const validator = require('validator');
 const { sanitizeEntity } = require("strapi-utils");
 const koaBody = require('koa-body');
+let { toTimestamp } = require('../../../helpers/time')
 
 module.exports = {
   async startBlogPost(ctx) {
@@ -64,10 +65,10 @@ module.exports = {
               id: sanitizedBlog.author.id,
               username: sanitizedBlog.author.username,
             },
-            start_time: sanitizedBlog.created_at,
+            start_time: toTimestamp(sanitizedBlog.published_at),
             is_draft: sanitizedBlog.is_draft,
-            last_edit: sanitizedBlog.updated_at,
-            publish_time: sanitizedBlog.published_at
+            last_edit: toTimestamp(sanitizedBlog.updated_at),
+            publish_time: toTimestamp(sanitizedBlog.published_at)
           }
         });
       } else {
@@ -134,10 +135,10 @@ module.exports = {
             id: sanitizedBlog.author.id,
             username: sanitizedBlog.author.username,
           },
-          start_time: sanitizedBlog.created_at,
+          start_time: toTimestamp(sanitizedBlog.published_at),
           is_draft: sanitizedBlog.is_draft,
-          last_edit: sanitizedBlog.updated_at,
-          publish_time: sanitizedBlog.published_at,
+          last_edit: toTimestamp(sanitizedBlog.updated_at),
+          publish_time: toTimestamp(sanitizedBlog.published_at),
           comment_count: sanitizedBlog.comments.length
         }
       })

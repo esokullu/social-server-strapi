@@ -189,18 +189,21 @@ module.exports = {
         model: strapi.query('user', 'users-permissions').model,
       });
       return {
-        [`${sanitizedUser.id}`]: {
           "id": sanitizedUser.id,
           "username": sanitizedUser.username,
           "email": sanitizedUser.email,
           "avatar": sanitizedUser.profile.avatar,
           "is_editor": sanitizedUser.role.name == "editor" ? 1 : 0
-      },
       }
     })
+    let sanitizedUsers2 = {}
+    for(let i in sanitizedUsers) {
+      let iid = sanitizedUsers[i].id;
+      sanitizedUsers2[iid] = sanitizedUsers[i]
+    }
     ctx.send({
       success: true,
-      members: sanitizedUsers
+      members: sanitizedUsers2
     })
   }
 };

@@ -5,6 +5,7 @@
  * to customize this controller
  */
 const validator = require('validator');
+let { toTimestamp } = require('../../../helpers/time');
 
 module.exports = {
   async addComment(ctx) {
@@ -91,7 +92,7 @@ module.exports = {
             [item.id]: {
               content: item.content,
               pending: false,
-              createTime: item.created_at,
+              createTime: toTimestamp(item.published_at),
               author: item.user.id
             }
           }
@@ -118,7 +119,7 @@ module.exports = {
             [item.id]: {
               content: item.content,
               pending: false,
-              createTime: item.created_at,
+              createTime: toTimestamp(item.published_at),
               author: item.user.id
             }
           }

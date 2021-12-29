@@ -5,6 +5,7 @@
  * to customize this controller
  */
 const { groupBy } = require('lodash');
+const { toTimestamp } = require('../../../helpers/time')
 
 module.exports = {
   async sendMessage(ctx) {
@@ -61,7 +62,7 @@ module.exports = {
           from: element.from.id,
           message: element.message,
           is_read: element.is_read,
-          timestamp: element.createdAt
+          timestamp: toTimestamp(element.createdAt)
         }
       });
       ctx.send({
@@ -87,7 +88,7 @@ module.exports = {
           to: element.to.id,
           message: element.message,
           is_read: element.is_read,
-          timestamp: element.createdAt
+          timestamp: toTimestamp(element.createdAt)
         }
       });
       ctx.send({
@@ -131,7 +132,7 @@ module.exports = {
             from: read.from.id,
             Content: read.message,
             IsRead: read.is_read,
-            SentTime: read.createdAt
+            SentTime: toTimestamp(read.createdAt)
           }
         })
       }
@@ -156,7 +157,7 @@ module.exports = {
         from: item[0].from.id,
         message: item[0].message,
         is_read: item[0].is_read,
-        timestamp: item[0].createdAt
+        timestamp: toTimestamp(item[0].createdAt)
       }
     });
     ctx.send({
@@ -194,7 +195,7 @@ module.exports = {
           from: item.from.id,
           message: item.message,
           is_read: item.is_read,
-          timestamp: item.createdAt
+          timestamp: toTimestamp(item.createdAt)
         }
       })
       ctx.send({
