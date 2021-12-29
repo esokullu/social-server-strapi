@@ -11,6 +11,8 @@ const koaBody = require('koa-body');
 
 module.exports = {
   async startBlogPost(ctx) {
+    console.log(":rocket: ~ file: blogs.js ~ line 17 ~ startBlogPost ~ ctx.request.body", ctx.request.body)
+    console.log(":rocket: ~ file: blogs.js ~ line 17 ~ startBlogPost ~ ctx.request.body.title", ctx.request.body.title)
     try {
       // knowing it's GET or POST method
       const query = ctx.query.title ? ctx.query : ctx.request.body;

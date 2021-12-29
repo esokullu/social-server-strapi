@@ -161,7 +161,7 @@ module.exports = {
     });
     ctx.send({
       success: true,
-      message: response
+      messages: response
     })
   },
 
