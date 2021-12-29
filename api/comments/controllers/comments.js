@@ -183,7 +183,7 @@ module.exports = {
         });
       }
       await strapi.services.comments.delete({
-        id: query.id.toString(),
+        id: query.comment_id.toString(),
         user: ctx.req.user.id
       })
       ctx.send({
