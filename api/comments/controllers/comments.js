@@ -32,7 +32,8 @@ module.exports = {
       const comment = await strapi.services.comments.create({
         url: query.url,
         user: ctx.req.user.id,
-        content: query.content
+        content: query.content,
+        public_id: query.public_id ? query.public_id : ''
       })
       ctx.send({
         success: true,
@@ -52,7 +53,8 @@ module.exports = {
       const comment = await strapi.services.comments.create({
         blog: query.id,
         user: ctx.req.user.id,
-        content: query.content
+        content: query.content,
+        public_id: query.public_id ? query.public_id : ''
       })
       ctx.send({
         success: true,
@@ -83,7 +85,8 @@ module.exports = {
         });
       }
       const comments = await strapi.services.comments.find({
-        url: query.url
+        url: query.url,
+        public_id: query.public_id ? query.public_id : ''
       })
       ctx.send({
         success: true,
@@ -102,6 +105,7 @@ module.exports = {
     else if(query.id) {
       const blog = await strapi.services.blogs.findOne({
         id: query.id.toString(),
+        public_id: query.public_id ? query.public_id : ''
       })
       if(!blog) {
         return ctx.send({
@@ -110,7 +114,8 @@ module.exports = {
         });
       }
       const comments = await strapi.services.comments.find({
-        blog: query.id
+        blog: query.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       ctx.send({
         success: true,
@@ -145,6 +150,7 @@ module.exports = {
       const comment = await strapi.services.comments.findOne({
         id: query.id.toString(),
         user: ctx.req.user.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       if(!comment){
         return ctx.send({
@@ -154,7 +160,8 @@ module.exports = {
       }
       await strapi.services.comments.update({
         id: query.id.toString(),
-        user: ctx.req.user.id
+        user: ctx.req.user.id, 
+        public_id: query.public_id ? query.public_id : ''
       },
       {
         content: query.content
@@ -176,6 +183,7 @@ module.exports = {
       const comment = await strapi.services.comments.findOne({
         id: query.comment_id.toString(),
         user: ctx.req.user.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       if(!comment){
         return ctx.send({
@@ -185,7 +193,8 @@ module.exports = {
       }
       await strapi.services.comments.delete({
         id: query.comment_id.toString(),
-        user: ctx.req.user.id
+        user: ctx.req.user.id,
+        
       })
       ctx.send({
         success: true

@@ -21,6 +21,9 @@
       "via": "user_followers",
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "public_id": {
+      "type": "string"
     }
   }
 }

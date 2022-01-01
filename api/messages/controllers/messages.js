@@ -36,6 +36,7 @@ module.exports = {
         from: ctx.req.user.id,
         to: query.to,
         message: query.message,
+        public_id: query.public_id ? query.public_id : ''
       })
       if(message.id) {
         ctx.send({
@@ -55,6 +56,7 @@ module.exports = {
     const response = {};
     const messages = await strapi.services.messages.find({
       to: ctx.req.user.id,
+      public_id: query.public_id ? query.public_id : ''
     })
     if(messages) {
       messages.forEach(element => {
@@ -81,6 +83,7 @@ module.exports = {
     const response = {};
     const messages = await strapi.services.messages.find({
       from: ctx.req.user.id,
+      public_id: query.public_id ? query.public_id : ''
     })
     if(messages) {
       messages.forEach(element => {
@@ -112,7 +115,8 @@ module.exports = {
       });
     } else {
       const message = await strapi.services.messages.findOne({
-        id: query.msgid.toString()
+        id: query.msgid.toString(),
+        public_id: query.public_id ? query.public_id : ''
       })
       if(!message) {
         ctx.send({
@@ -121,7 +125,8 @@ module.exports = {
         });
       } else {
         const read = await strapi.services.messages.update({
-          id: query.msgid.toString()
+          id: query.msgid.toString(),
+          public_id: query.public_id ? query.public_id : ''
         }, {
           is_read: true
         })
@@ -143,9 +148,14 @@ module.exports = {
     let response = {};
     const conversations = await strapi.services.messages.find({
       _where: {
-        _or: [
-          {from: ctx.req.user.id},
-          {to: ctx.req.user.id}
+        _and: [
+          { public_id: query.public_id ? query.public_id : '' },
+          { 
+            _or: [
+              {from: ctx.req.user.id},
+              {to: ctx.req.user.id}
+            ]
+          }
         ]
       }
     })
@@ -177,14 +187,19 @@ module.exports = {
     } else {
       const conversation = await strapi.services.messages.find({
         _where: {
-          _or: [
-            { 
-              from: ctx.req.user.id,
-              to: query.with
-            },
+          _and: [
+            { public_id: query.public_id ? query.public_id : '' },
             {
-              to: ctx.req.user.id,
-              from: query.with
+              _or: [
+                { 
+                  from: ctx.req.user.id,
+                  to: query.with
+                },
+                {
+                  to: ctx.req.user.id,
+                  from: query.with
+                }
+              ]
             }
           ]
         }
@@ -223,7 +238,8 @@ module.exports = {
         const reply = await strapi.services.messages.create({
           to: message.from.id,
           from: ctx.req.user.id,
-          message: query.message
+          message: query.message,
+          public_id: query.public_id ? query.public_id : ''
         })
         ctx.send({
           success: true
@@ -236,6 +252,7 @@ module.exports = {
     const messages = await strapi.services.messages.find({
       to: ctx.req.user.id,
       is_read: true,
+      public_id: query.public_id ? query.public_id : ''
     })
     if(messages) {
       ctx.send({

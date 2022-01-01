@@ -201,6 +201,7 @@ module.exports = {
     params['username'] = requestQuery.username;
     params['email'] = requestQuery.email;
     params['password'] = requestQuery.password;
+    params['public_id'] = requestQuery.public_id ? requestQuery.public_id : '';
 
     // Password, email, username is required.
     if (!params.password || !params.email || !params.username) {

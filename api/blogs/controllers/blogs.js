@@ -21,7 +21,8 @@ module.exports = {
         const blog = await strapi.services.blogs.create({
           title: query.title,
           content: query.content,
-          author: ctx.req.user.id
+          author: ctx.req.user.id,
+          public_id: query.public_id ? query.public_id : ''
         })
         const sanitizedBlog = sanitizeEntity(blog, {
           model: strapi.models["blogs"],
@@ -51,6 +52,7 @@ module.exports = {
       if(validator.isLength(query.id, {min:1})) {
         const blog = await strapi.services.blogs.findOne({
           id: query.id.toString(),
+          public_id: query.public_id ? query.public_id : ''
         })
         const sanitizedBlog = sanitizeEntity(blog, {
           model: strapi.models["blogs"],
@@ -91,6 +93,7 @@ module.exports = {
       if(validator.isLength(query.id, {min:1})) {
         const blog = await strapi.services.blogs.delete({
           id: query.id.toString(),
+          public_id: query.public_id ? query.public_id : '',
           _limit: 1 // do not delete more than one
         })
         ctx.send({
@@ -118,6 +121,7 @@ module.exports = {
       const offset = !query.offset ? 0 : query.offset;
 
       const posts = await strapi.services.blogs.find({
+        public_id: query.public_id ? query.public_id : '',
         _limit: count, 
         _sort: `created_at:${order}`,
         _start: offset 

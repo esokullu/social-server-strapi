@@ -68,12 +68,12 @@
       "model": "profiles"
     },
     "user_followings": {
-      "collection": "follows",
-      "via": "follower"
+      "via": "follower",
+      "collection": "follows"
     },
     "user_followers": {
-      "collection": "follows",
-      "via": "following"
+      "via": "following",
+      "collection": "follows"
     },
     "stars": {
       "via": "user",
@@ -82,6 +82,9 @@
     "comments": {
       "via": "user",
       "collection": "comments"
+    },
+    "public_id": {
+      "type": "string"
     }
   }
 }
