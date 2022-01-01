@@ -60,7 +60,8 @@ module.exports = {
         })
       }
       const profile = await strapi.services.profiles.findOne({
-        user: query.id
+        user: query.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       if(!profile) {
         return ctx.send({
