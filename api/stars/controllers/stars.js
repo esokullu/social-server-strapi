@@ -29,6 +29,7 @@ module.exports = {
       let star = await strapi.services.stars.findOne({
         url: query.url,
         user: ctx.req.user.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       if(!star) {
         const urlResponse = await fetch(query.url);
@@ -40,10 +41,12 @@ module.exports = {
         star = await strapi.services.stars.create({
           url: query.url,
           user: ctx.req.user.id,
-          urlTitle
+          urlTitle,
+          public_id: query.public_id ? query.public_id : ''
         })
         const stars = await strapi.services.stars.find({
           url: query.url,
+          public_id: query.public_id ? query.public_id : ''
         })
         ctx.send({
           success: true,
@@ -59,6 +62,7 @@ module.exports = {
     else if(query.id) {
       const blog = await strapi.services.blogs.findOne({
         id: query.id.toString(),
+        public_id: query.public_id ? query.public_id : ''
       })
       if(!blog) {
         return ctx.send({
@@ -69,14 +73,17 @@ module.exports = {
       let star = await strapi.services.stars.findOne({
         blog: query.id,
         user: ctx.req.user.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       if(!star) {
         star = await strapi.services.stars.create({
           blog: query.id,
           user: ctx.req.user.id,
+          public_id: query.public_id ? query.public_id : ''
         })
         const stars = await strapi.services.stars.find({
           blog: query.id,
+          public_id: query.public_id ? query.public_id : ''
         })
         ctx.send({
           success: true,
@@ -115,11 +122,13 @@ module.exports = {
       let star = await strapi.services.stars.findOne({
         url: query.url,
         user: ctx.req.user.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       if(star) {
         star = await strapi.services.stars.delete({
           url: query.url,
           user: ctx.req.user.id,
+          public_id: query.public_id ? query.public_id : ''
         })
         ctx.send({
           success: true,
@@ -185,6 +194,7 @@ module.exports = {
       }
       let stars = await strapi.services.stars.find({
         url: query.url,
+        public_id: query.public_id ? query.public_id : ''
       })
       ctx.send({
         success: true,
@@ -195,6 +205,7 @@ module.exports = {
     else if(query.id) {
       let stars = await strapi.services.stars.find({
         blog: query.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       ctx.send({
         success: true,
@@ -211,7 +222,9 @@ module.exports = {
   },
 
   async getStarredContent(ctx) {
-    const stars = await strapi.services.stars.find()
+    const stars = await strapi.services.stars.find({
+      public_id: ctx.req.public_id ? ctx.req.public_id : ''
+    })
     ctx.send({
       success: true,
       pages: groupStarred(stars)
@@ -222,6 +235,7 @@ module.exports = {
   async getMyStarredContent(ctx) {
     const stars = await strapi.services.stars.find({
       user: ctx.req.user.id,
+      public_id: ctx.req.public_id ? ctx.req.public_id : ''
     })
     ctx.send({
       success: true,

@@ -25,7 +25,8 @@ module.exports = {
         })
       }
       const user = await strapi.query('user', 'users-permissions').findOne({
-        id: query.id.toString()
+        id: query.id.toString(),
+        public_id: query.public_id ? query.public_id : ''
       })
       if(!user) {
         return ctx.send({
@@ -35,7 +36,8 @@ module.exports = {
       }
       const follow = await strapi.services.follows.findOne({
         following: query.id,
-        follower: ctx.req.user.id
+        follower: ctx.req.user.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       if(follow) {
         return ctx.send({
@@ -45,7 +47,8 @@ module.exports = {
       }
       await strapi.services.follows.create({
         following: query.id,
-        follower: ctx.req.user.id
+        follower: ctx.req.user.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       return ctx.send({
         success: true,
@@ -69,7 +72,8 @@ module.exports = {
       }
       
       const user = await strapi.query('user', 'users-permissions').findOne({
-        id: query.id.toString()
+        id: query.id.toString(),
+        public_id: query.public_id ? query.public_id : ''
       })
       if(!user) {
         return ctx.send({
@@ -80,7 +84,8 @@ module.exports = {
 
       const follow = await strapi.services.follows.findOne({
         following: query.id,
-        follower: ctx.req.user.id
+        follower: ctx.req.user.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       if(!follow) {
         return ctx.send({
@@ -91,7 +96,8 @@ module.exports = {
 
       await strapi.services.follows.delete({
         following: query.id,
-        follower: ctx.req.user.id
+        follower: ctx.req.user.id,
+        public_id: query.public_id ? query.public_id : ''
       })
       return ctx.send({
         success: true,
@@ -114,7 +120,8 @@ module.exports = {
     }
 
     const user = await strapi.query('user', 'users-permissions').findOne({
-      id: query.id.toString()
+      id: query.id.toString(),
+      public_id: query.public_id ? query.public_id : ''
     })
     if(!user) {
       return ctx.send({
@@ -125,7 +132,8 @@ module.exports = {
 
     const following = await Promise.all(Object.entries(user.user_followings).map(async ([key, item]) => {
       let profile = await strapi.services.profiles.findOne({
-        user: item.following
+        user: item.following,
+        public_id: query.public_id ? query.public_id : ''
       })
       let sanitizedProfile = sanitizeEntity(profile, {
         model: strapi.models["profiles"],
@@ -152,7 +160,8 @@ module.exports = {
     }
 
     const user = await strapi.query('user', 'users-permissions').findOne({
-      id: query.id.toString()
+      id: query.id.toString(),
+      public_id: query.public_id ? query.public_id : ''
     })
     if(!user) {
       return ctx.send({
@@ -182,6 +191,7 @@ module.exports = {
 
   async getMembers(ctx) {
     const users = await strapi.query('user', 'users-permissions').find({
+      public_id: ctx.query.public_id ? ctx.query.public_id : '',
       _limit: -1
     })
     const sanitizedUsers = users.map(item=>{
@@ -193,7 +203,7 @@ module.exports = {
           "username": sanitizedUser.username,
           "email": sanitizedUser.email,
           "avatar": sanitizedUser.profile.avatar,
-          "is_editor": sanitizedUser.role.name == "editor" ? 1 : 0
+          "is_editor": sanitizedUser.role.name == "editor" ? 1 : ''
       }
     })
     let sanitizedUsers2 = {}

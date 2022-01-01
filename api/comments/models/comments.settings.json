@@ -24,9 +24,12 @@
       "model": "blogs"
     },
     "user": {
+      "via": "comments",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "comments"
+      "model": "user"
+    },
+    "public_id": {
+      "type": "string"
     }
   }
 }

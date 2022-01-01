@@ -35,6 +35,9 @@
     "stars": {
       "via": "blog",
       "collection": "stars"
+    },
+    "public_id": {
+      "type": "string"
     }
   }
 }

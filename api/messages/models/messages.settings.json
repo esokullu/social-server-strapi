@@ -27,6 +27,9 @@
     "to": {
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "public_id": {
+      "type": "string"
     }
   }
 }

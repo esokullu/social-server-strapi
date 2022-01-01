@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "networks",
   "info": {
-    "name": "Network"
+    "name": "Network",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -11,14 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "slug": {
+    "public_id": {
       "type": "string"
     },
     "title": {
       "type": "string"
-    },
-    "uuid": {
-      "type": "uid"
     }
   }
 }

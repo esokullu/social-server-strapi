@@ -16,13 +16,13 @@
       "type": "string"
     },
     "user": {
+      "via": "stars",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "stars"
+      "model": "user"
     },
     "blog": {
-      "model": "blogs",
-      "via": "stars"
+      "via": "stars",
+      "model": "blogs"
     },
     "urlTitle": {
       "type": "string"
