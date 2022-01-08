@@ -2,58 +2,56 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/groups",
-      "handler": "groups.find",
+      "path": "/networks",
+      "handler": "network.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/groups/count",
-      "handler": "groups.count",
+      "path": "/networks/count",
+      "handler": "network.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/groups/:id",
-      "handler": "groups.findOne",
+      "path": "/networks/:id",
+      "handler": "network.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/groups",
-      "handler": "groups.create",
+      "path": "/networks",
+      "handler": "network.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/groups/:id",
-      "handler": "groups.update",
+      "path": "/networks/:id",
+      "handler": "network.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/groups/:id",
-      "handler": "groups.delete",
+      "path": "/networks/:id",
+      "handler": "network.delete",
       "config": {
         "policies": []
       }
     },
-
-
     {
       "method": "GET",
-      "path": "/createGroup",
-      "handler": "groups.createGroup",
+      "path": "/v1/getCustomFields",
+      "handler": "network.getCustomFields",
       "config": {
         "policies": []
       }

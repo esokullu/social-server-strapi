@@ -58,6 +58,33 @@
       "via": "users",
       "plugin": "users-permissions",
       "configurable": false
+    },
+    "blogs": {
+      "via": "author",
+      "collection": "blogs"
+    },
+    "profile": {
+      "via": "user",
+      "model": "profiles"
+    },
+    "user_followings": {
+      "via": "follower",
+      "collection": "follows"
+    },
+    "user_followers": {
+      "via": "following",
+      "collection": "follows"
+    },
+    "stars": {
+      "via": "user",
+      "collection": "stars"
+    },
+    "comments": {
+      "via": "user",
+      "collection": "comments"
+    },
+    "public_id": {
+      "type": "string"
     }
   }
 }

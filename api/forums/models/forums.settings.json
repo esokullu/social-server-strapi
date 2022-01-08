@@ -20,6 +20,10 @@
     },
     "in_response_to": {
       "model": "forums"
+    },
+    "uuid": {
+      "type": "uid",
+      "required": true
     }
   }
 }

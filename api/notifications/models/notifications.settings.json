@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notifications",
+  "info": {
+    "name": "Notifications"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "message": {
+      "type": "string"
+    }
+  }
+}

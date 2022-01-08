@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "messages",
   "info": {
-    "name": "Messages"
+    "name": "Messages",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -12,11 +13,23 @@
   "pluginOptions": {},
   "attributes": {
     "message": {
-      "type": "string"
+      "type": "string",
+      "required": true
+    },
+    "from": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false
     },
     "to": {
       "plugin": "users-permissions",
-      "collection": "user"
+      "model": "user"
+    },
+    "public_id": {
+      "type": "string"
     }
   }
 }

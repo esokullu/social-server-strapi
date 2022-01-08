@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "stars",
+  "collectionName": "networks",
   "info": {
-    "name": "Stars",
+    "name": "Network",
     "description": ""
   },
   "options": {
@@ -12,19 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "url": {
+    "public_id": {
       "type": "string"
     },
-    "user": {
-      "via": "stars",
-      "plugin": "users-permissions",
-      "model": "user"
-    },
-    "blog": {
-      "via": "stars",
-      "model": "blogs"
-    },
-    "urlTitle": {
+    "title": {
       "type": "string"
     }
   }

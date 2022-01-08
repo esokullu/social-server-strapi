@@ -47,6 +47,70 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/sendMessage",
+      "handler": "messages.sendMessage",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getInbox",
+      "handler": "messages.getInbox",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getOutbox",
+      "handler": "messages.getOutbox",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getMessage",
+      "handler": "messages.getMessage",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getConversations",
+      "handler": "messages.getConversations",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/getConversation",
+      "handler": "messages.getConversation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/reply",
+      "handler": "messages.reply",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/countUnreadMessages",
+      "handler": "messages.countUnreadMessages",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

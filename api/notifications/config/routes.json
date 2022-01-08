@@ -2,58 +2,56 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/groups",
-      "handler": "groups.find",
+      "path": "/notifications",
+      "handler": "notifications.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/groups/count",
-      "handler": "groups.count",
+      "path": "/notifications/count",
+      "handler": "notifications.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/groups/:id",
-      "handler": "groups.findOne",
+      "path": "/notifications/:id",
+      "handler": "notifications.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/groups",
-      "handler": "groups.create",
+      "path": "/notifications",
+      "handler": "notifications.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/groups/:id",
-      "handler": "groups.update",
+      "path": "/notifications/:id",
+      "handler": "notifications.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/groups/:id",
-      "handler": "groups.delete",
+      "path": "/notifications/:id",
+      "handler": "notifications.delete",
       "config": {
         "policies": []
       }
     },
-
-
     {
       "method": "GET",
-      "path": "/createGroup",
-      "handler": "groups.createGroup",
+      "path": "/v1/getNotificationsCount",
+      "handler": "notifications.getNotificationsCount",
       "config": {
         "policies": []
       }
