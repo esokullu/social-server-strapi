@@ -4,6 +4,7 @@ A REST API for social networking backend.
 
 Uses strapi
 
+Make sure to edit the .env file
 
 ```
 cd frontend
