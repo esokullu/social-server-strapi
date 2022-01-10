@@ -43,6 +43,9 @@
     },
     "customfield3": {
       "type": "text"
+    },
+    "public_id": {
+      "type": "string"
     }
   }
 }

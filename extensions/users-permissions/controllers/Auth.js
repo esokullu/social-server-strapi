@@ -64,6 +64,8 @@ module.exports = {
         query.username = params.identifier;
       }
 
+      query.public_id = params.public_id;
+
       // Check if the user exists.
       const user = await strapi.query('user', 'users-permissions').findOne(query);
 
@@ -256,6 +258,7 @@ module.exports = {
 
     const user = await strapi.query('user', 'users-permissions').findOne({
       email: params.email,
+      public_id: params.public_id
     });
 
     if (user && user.provider === params.provider) {
@@ -273,7 +276,10 @@ module.exports = {
     }
 
     if (params.username) {
-      const user = await strapi.query('user', 'users-permissions').findOne({ username: params.username });
+      const user = await strapi.query('user', 'users-permissions').findOne({ 
+        username: params.username,
+        public_id: params.public_id 
+      });
 
       if (user) {
         return ctx.send({
@@ -290,7 +296,8 @@ module.exports = {
 
       const user = await strapi.query('user', 'users-permissions').create(params);
       const profile = await strapi.services.profiles.create({
-        user: user.id
+        user: user.id,
+        public_id: params.public_id
       })
 
       const sanitizedUser = sanitizeEntity(user, {

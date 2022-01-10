@@ -145,19 +145,20 @@ module.exports = {
   },
 
   async getConversations(ctx) {
+    const query = ctx.query;
+    console.log(query.public_id);
+    console.log(ctx.req.user);
     let response = {};
     const conversations = await strapi.services.messages.find({
-      _where: {
-        _and: [
-          { public_id: query.public_id ? query.public_id : '' },
+          _and: [   
           { 
             _or: [
               {from: ctx.req.user.id},
               {to: ctx.req.user.id}
-            ]
-          }
+            ]   
+          },
+          { public_id: (query.public_id ? query.public_id : '' ) },
         ]
-      }
     })
     const groupedConversation = groupBy(conversations, (item) => ctx.req.user.id == item.from.id ? item.to.id : item.from.id)
     Object.entries(groupedConversation).map(([key, item]) => {

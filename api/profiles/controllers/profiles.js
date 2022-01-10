@@ -21,19 +21,19 @@ module.exports = {
       }
       let profile = await strapi.services.profiles.findOne({
         user: ctx.req.user.id,
-        public_id: query.public_id ? query.public_id : ''
+        public_id: ( query.public_id ? query.public_id : '' )
       })
 
       if(!profile) {
         profile = await strapi.services.profiles.create({
           ...query,
           user: ctx.req.user.id,
-          public_id: query.public_id ? query.public_id : ''
+          public_id: ( query.public_id ? query.public_id : '' )
         })
       } else {
         profile = await strapi.services.profiles.update({
           user: ctx.req.user.id,
-          public_id: query.public_id ? query.public_id : ''
+          public_id: ( query.public_id ? query.public_id : '' )
         }, {
           about: query.about,
         })
@@ -59,16 +59,17 @@ module.exports = {
           reason: "Invalid user ID"
         })
       }
-      const profile = await strapi.services.profiles.findOne({
+      const profile = await strapi.services.profiles.findOne({ 
         user: query.id,
-        public_id: query.public_id ? query.public_id : ''
-      })
+        public_id: ( query.public_id ? query.public_id : '' )
+      });
       if(!profile) {
         return ctx.send({
           success: false,
           reason: "Invalid user ID"
         })
       }
+      
       const sanitizedProfile = sanitizeEntity(profile, {
         model: strapi.models["profiles"],
       })
