@@ -26,6 +26,9 @@
     },
     "urlTitle": {
       "type": "string"
+    },
+    "public_id": {
+      "type": "string"
     }
   }
 }

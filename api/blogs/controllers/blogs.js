@@ -22,7 +22,7 @@ module.exports = {
           title: query.title,
           content: query.content,
           author: ctx.req.user.id,
-          public_id: query.public_id ? query.public_id : ''
+          public_id: ctx.query.public_id ? ctx.query.public_id : '' // ALWAYS GET
         })
         const sanitizedBlog = sanitizeEntity(blog, {
           model: strapi.models["blogs"],
