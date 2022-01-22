@@ -55,6 +55,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/createNetwork",
+      "handler": "network.create",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
