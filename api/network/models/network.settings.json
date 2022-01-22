@@ -20,6 +20,11 @@
     },
     "custom_domain": {
       "type": "string"
+    },
+    "creator": {
+      "type": "string",
+      "private": false,
+      "required": true
     }
   }
 }

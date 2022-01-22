@@ -21,7 +21,7 @@ module.exports = {
         });
     },
 
-    async create(ctx) {
+    async createNetwork(ctx) {
         const pass = "some_rally rand0 sh1t";
         const query = ctx.query;
         try {

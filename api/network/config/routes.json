@@ -59,7 +59,7 @@
     {
       "method": "GET",
       "path": "/v1/createNetwork",
-      "handler": "network.create",
+      "handler": "network.createNetwork",
       "config": {
         "policies": []
       }
