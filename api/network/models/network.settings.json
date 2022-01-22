@@ -17,6 +17,9 @@
     },
     "title": {
       "type": "string"
+    },
+    "custom_domain": {
+      "type": "string"
     }
   }
 }
