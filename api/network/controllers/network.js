@@ -24,6 +24,7 @@ module.exports = {
     async createNetwork(ctx) {
         const pass = "some_rally rand0 sh1t";
         const query = ctx.query;
+        console.log(pass)
         try {
             if(!query.pass||query.pass!=pass) {
                 ctx.send({
@@ -31,26 +32,19 @@ module.exports = {
                     reason: "Not allowed (1)"
                   });
             }
-            if(validator.isLength(query.title, {min:1, max: 255}) && validator.isLength(query.content, {min:1})) {
+            const public_id = uuidv4()
               const network = await strapi.services.network.create({
                 title: query.title,
                 custom_domain: '',
                 creator: query.creator,
-                public_id: uuidv4()
+                public_id: public_id,
+                slug: query.slug
               })
-              const sanitizedNetwork = sanitizeEntity(network, {
-                model: strapi.models["network"],
-              });
               ctx.send({
                 success: true,
-                public_id: sanitizedNetwork.public_id
+                public_id: public_id
               });
-            } else {
-              ctx.send({
-                success: false,
-                reason: "Not allowed (2)"
-              });
-            }
+              console.log('and him')
           } catch (error) {
             // try to fetch the POST query
             ctx.send({

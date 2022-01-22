@@ -1,6 +1,6 @@
 {
   "kind": "collectionType",
-  "collectionName": "networks",
+  "collectionName": "network",
   "info": {
     "name": "Network",
     "description": ""
@@ -25,6 +25,10 @@
       "type": "string",
       "private": false,
       "required": true
+    },
+    "slug": {
+      "type": "string",
+      "unique": true
     }
   }
 }
