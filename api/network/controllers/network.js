@@ -48,8 +48,22 @@ module.exports = {
               // cd frontend
               // bin/generate name Title --id `uuidgen` --host '/v1/'    
               // mv dist/name ../public
-              console.log(exec("pwd"));
-              let cmd = "cd frontend && bin/generate "+escapeshellarg(query.slug)+" "+escapeshellarg(query.title)+" --id "+escapeshellarg(public_id)+"--host "+escapeshellarg(api_host)
+              exec("pwd", (error, stdout, stderr) => {
+                if (error) {
+                    console.log(`error: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.log(`stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`stdout: ${stdout}`);
+              });
+              let cmd = "cd frontend && bin/generate "
+                + escapeshellarg(query.slug) + " " + escapeshellarg(query.title) 
+                + " --id " + escapeshellarg(public_id) 
+                + "--host " + escapeshellarg(api_host)
+                + " && mv " + escapeshellarg("dist/"+query.slug) + "../public";
               console.log(cmd);
               exec(cmd, (error, stdout, stderr) => {
                 if (error) {
