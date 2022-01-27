@@ -2,6 +2,9 @@
 
 const { create } = require("lodash");
 const { v4: uuidv4 } = require('uuid');
+const { exec } = require("child_process");
+const escapeshellarg = require('escapeshellarg')
+
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -40,6 +43,26 @@ module.exports = {
                 public_id: public_id,
                 slug: query.slug
               })
+
+              const api_host = "https://groups.land/v1";
+              // cd frontend
+              // bin/generate name Title --id `uuidgen` --host '/v1/'    
+              // mv dist/name ../public
+              console.log(exec("pwd"));
+              let cmd = "cd frontend && bin/generate "+escapeshellarg(query.slug)+" "+escapeshellarg(query.title)+" --id "+escapeshellarg(public_id)+"--host "+escapeshellarg(api_host)
+              console.log(cmd);
+              exec(cmd, (error, stdout, stderr) => {
+                if (error) {
+                    console.log(`error: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.log(`stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`stdout: ${stdout}`);
+              });
+
               ctx.send({
                 success: true,
                 public_id: public_id
