@@ -62,7 +62,7 @@ module.exports = {
               let cmd = "cd frontend && bin/generate "
                 + escapeshellarg(query.slug) + " " + escapeshellarg(query.title) 
                 + " --id " + escapeshellarg(public_id) 
-                + "--host " + escapeshellarg(api_host)
+                + " --host " + escapeshellarg(api_host)
                 + " && mv " + escapeshellarg("dist/"+query.slug) + " ../public";
               console.log(cmd);
               exec(cmd, (error, stdout, stderr) => {
