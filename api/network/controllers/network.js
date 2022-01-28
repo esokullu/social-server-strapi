@@ -63,7 +63,7 @@ module.exports = {
                 + escapeshellarg(query.slug) + " " + escapeshellarg(query.title) 
                 + " --id " + escapeshellarg(public_id) 
                 + "--host " + escapeshellarg(api_host)
-                + " && mv " + escapeshellarg("dist/"+query.slug) + "../public";
+                + " && mv " + escapeshellarg("dist/"+query.slug) + " ../public";
               console.log(cmd);
               exec(cmd, (error, stdout, stderr) => {
                 if (error) {
