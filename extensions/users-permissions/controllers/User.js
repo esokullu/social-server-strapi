@@ -45,10 +45,21 @@ module.exports = {
         created_at	"2021-10-28T15:30:53.516Z"
         updated_at	"2021-10-28T15:30:53.528Z"
       */
+      let public_id = ctx.query.public_id ? ctx.query.public_id : '';
+      let isAdmin = false
+      console.log(public_id);
+      if(public_id!='') {
+        const network = await strapi.db.query('network').findOne({
+          public_id: public_id
+        })
+        isAdmin = ( network.creator == me.email );
+        console.log(network);
+        console.log(isAdmin);
+      }
       ctx.body = {
         success: true,
         id: me.id,
-        admin: false,
+        admin: isAdmin,
         username: me.username,
         editor: true,
         pending: false

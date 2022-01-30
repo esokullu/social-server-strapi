@@ -21,14 +21,13 @@
     "custom_domain": {
       "type": "string"
     },
-    "creator": {
-      "type": "string",
-      "private": false,
-      "required": true
-    },
     "slug": {
       "type": "string",
       "unique": true
+    },
+    "creator": {
+      "type": "string",
+      "required": true
     }
   }
 }

@@ -24,6 +24,9 @@ module.exports = {
     const requestQuery = ctx.request.query;
     params['identifier'] = requestQuery.username;
     params['password'] = requestQuery.password;
+
+    //console.log(params)
+    //console.log(requestQuery)
     
     const store = await strapi.store({
       environment: '',
@@ -64,7 +67,7 @@ module.exports = {
         query.username = params.identifier;
       }
 
-      query.public_id = params.public_id;
+      query.public_id = requestQuery.public_id ? requestQuery.public_id : '';
 
       // Check if the user exists.
       const user = await strapi.query('user', 'users-permissions').findOne(query);
@@ -120,6 +123,7 @@ module.exports = {
           maxAge: 1000 * 60 * 60 * 24 * 14, // 14 Day Age
           domain: process.env.FE_DOMAIN
         });
+        //console.log(token);
         let _user = sanitizeEntity(user.toJSON ? user.toJSON() : user, {
           model: strapi.query('user', 'users-permissions').model,
         });

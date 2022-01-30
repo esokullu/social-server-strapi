@@ -84,7 +84,8 @@
       "collection": "comments"
     },
     "public_id": {
-      "type": "string"
+      "type": "string",
+      "configurable": false
     }
   }
 }
