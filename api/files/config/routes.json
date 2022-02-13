@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/uploadFile",
+      "handler": "files.create",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
