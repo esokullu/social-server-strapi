@@ -50,7 +50,7 @@
     },
     {
       "method": "POST",
-      "path": "/uploadFile",
+      "path": "/v1/uploadFile",
       "handler": "files.create",
       "config": {
         "policies": []
