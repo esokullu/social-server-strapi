@@ -51,7 +51,11 @@ const setDefaultPermissions = async () => {
         "getmembers", 
         "getcustomfields", 
         "getprofile", 
-        "isstarred"
+        "isstarred",
+
+        "login",
+        "forgotpassword",
+        "register"
     ];
     var inArray = (needle, haystack) => {// https://stackoverflow.com/questions/784012/javascript-equivalent-of-phps-in-array
         let _length = haystack.length;
@@ -64,10 +68,14 @@ const setDefaultPermissions = async () => {
   const authenticated_role = await findAuthenticatedRole();
   const authenticated_permissions = await strapi
     .query("permission", "users-permissions")
-    .find({ type: "application", role: authenticated_role.id, _limit: -1 });
+    .find({ /*type: "application", */role: authenticated_role.id, _limit: -1 });
   const public_permissions = await strapi
     .query("permission", "users-permissions")
-    .find({ type: "application", role: public_role.id, _limit: -1  });
+    .find({ /*type: "application", */role: public_role.id, _limit: -1  });
+  /*const public_permissions_auth = await strapi
+    .query("permission", "users-permissions")
+    .find({ type: "users-permissions", role: public_role.id, _limit: -1  });
+    */
   await Promise.all(
     authenticated_permissions.map(p =>
       strapi
@@ -85,6 +93,16 @@ const setDefaultPermissions = async () => {
         } 
     )
   );
+  /*
+  await Promise.all(
+    public_permissions_auth.map(p => {
+        if(inArray(p.action, open_to_public)) {
+          strapi
+              .query("permission", "users-permissions")
+              .update({ id: p.id }, { enabled: true })
+      }
+    })
+  );*/
 };
 
 const isFirstRun = async () => {
