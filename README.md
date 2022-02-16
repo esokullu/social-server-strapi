@@ -11,3 +11,5 @@ cd frontend
 bin/generate name Title --id `uuidgen` --host '/v1/'    
 mv dist/name ../public
 ```
+
+ffmpeg must be installed on the server
