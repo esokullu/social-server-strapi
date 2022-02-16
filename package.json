@@ -28,6 +28,7 @@
     "strapi-plugin-i18n": "3.6.8",
     "strapi-plugin-upload": "^3.6.8",
     "strapi-plugin-users-permissions": "3.6.8",
+    "strapi-plugin-video-thumbnail": "^0.1.2",
     "strapi-utils": "3.6.8",
     "validator": "^13.7.0"
   },
