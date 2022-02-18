@@ -53,9 +53,13 @@ const setDefaultPermissions = async () => {
         "getprofile", 
         "isstarred",
 
+        "createnetwork",
+
         "login",
         "forgotpassword",
         "register"
+
+        
     ];
     var inArray = (needle, haystack) => {// https://stackoverflow.com/questions/784012/javascript-equivalent-of-phps-in-array
         let _length = haystack.length;
