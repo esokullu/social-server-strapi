@@ -10,8 +10,11 @@ module.exports = async (ctx, next) => {
     return next();
   }
 
+  let public_id = ctx.query.public_id ? ctx.query.public_id : '';
+  let token_name = 'token' + public_id;
+
   if (ctx.request && ctx.request.header && !ctx.request.header.authorization) {
-    const token = ctx.cookies.get("token");
+    const token = ctx.cookies.get(token_name);
     if (token) {
       ctx.request.header.authorization = "Bearer " + token;
     }

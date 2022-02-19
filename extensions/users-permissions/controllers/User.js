@@ -77,7 +77,9 @@ module.exports = {
    * @param ctx
    */
   async logout(ctx) {
-    ctx.cookies.set("token", null);
+    let public_id = ctx.query.public_id ? ctx.query.public_id : '';
+    let token_name = 'token' + public_id;
+    ctx.cookies.set(token_name, null);
     ctx.send({
       success: true
     });

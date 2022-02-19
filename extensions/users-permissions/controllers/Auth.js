@@ -118,7 +118,8 @@ module.exports = {
         const token = strapi.plugins["users-permissions"].services.jwt.issue({
           id: user.id,
         });
-        ctx.cookies.set("token", token, {
+        let token_name = 'token' + query.public_id;
+        ctx.cookies.set(token_name, token, {
           httpOnly: true,
           secure: true,
           maxAge: 1000 * 60 * 60 * 24 * 14, // 14 Day Age
