@@ -48,18 +48,7 @@ module.exports = {
       */
       let public_id = ctx.query.public_id ? ctx.query.public_id : '';
       let isAdmin = await admin(public_id, me.email);
-      /*
-      let isAdmin = false
-      console.log(public_id);
-      if(public_id!='') {
-        const network = await strapi.db.query('network').findOne({
-          public_id: public_id
-        })
-        isAdmin = ( network.creator == me.email );
-        console.log(network);
-        console.log(isAdmin);
-      }
-      */
+
       ctx.body = {
         success: true,
         id: me.id,
