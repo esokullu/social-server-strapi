@@ -8,6 +8,7 @@
 
 const _ = require('lodash');
 const { sanitizeEntity } = require('strapi-utils');
+const admin = require('../../../helpers/admin');
 
 const sanitizeUser = user =>
   sanitizeEntity(user, {
@@ -46,6 +47,8 @@ module.exports = {
         updated_at	"2021-10-28T15:30:53.528Z"
       */
       let public_id = ctx.query.public_id ? ctx.query.public_id : '';
+      let isAdmin = await admin(public_id, me.email);
+      /*
       let isAdmin = false
       console.log(public_id);
       if(public_id!='') {
@@ -56,6 +59,7 @@ module.exports = {
         console.log(network);
         console.log(isAdmin);
       }
+      */
       ctx.body = {
         success: true,
         id: me.id,

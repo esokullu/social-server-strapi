@@ -11,6 +11,7 @@ const crypto = require('crypto');
 const _ = require('lodash');
 const grant = require('grant-koa');
 const { sanitizeEntity } = require('strapi-utils');
+const admin = require('../../../helpers/admin');
 
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const formatError = error => [
@@ -127,11 +128,13 @@ module.exports = {
         let _user = sanitizeEntity(user.toJSON ? user.toJSON() : user, {
           model: strapi.query('user', 'users-permissions').model,
         });
+        let isAdmin = await admin(query.public_id, _user.email);
         ctx.send({
           success: true,
           id: _user.id.toString(),
           username: _user.username,
           pending: false,
+          admin: isAdmin,
           _strapi: {
             status: 'Authenticated',
             user: _user
@@ -319,11 +322,12 @@ module.exports = {
       }
 
       const jwt = strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user, ['id']));
-
+      let isAdmin = await admin(params.public_id, params.email);
       return ctx.send({
         success: true,
         id: sanitizedUser.id.toString(),
         username: sanitizedUser.username,
+        admin: isAdmin,
         pending_moderation: false,
         pending_verification: false
       });

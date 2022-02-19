@@ -3,12 +3,14 @@
 */
 
 var showAdministrationOptions = function() {
-    if (localStorage.getItem("username")=="admin") {
-        document.body.classList.add("admin");
-    }
-    else {
-        document.body.classList.remove("admin");
-    }
+    window.GraphJS.getSession(function(response) {
+        if(response.success&&response.admin) {
+            document.body.classList.add("admin");
+        }
+        else {
+            document.body.classList.remove("admin");
+        }
+    });
 };
 
 var checkLogin = function() {
